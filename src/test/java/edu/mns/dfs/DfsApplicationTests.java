@@ -1,5 +1,6 @@
 package edu.mns.dfs;
 
+import edu.mns.dfs.model.Article;
 import edu.mns.dfs.model.Utilisateur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,39 +31,28 @@ class DfsApplicationTests {
 				.build();
 	}
 
-//	@Test
-//	void creationUtilisateur_listeCompetenceNonNull() {
-//
-//		Utilisateur utilisateur = new Utilisateur();
-//		assertNotNull(utilisateur.getListeCompetence());
-//
-//	}
-//
-//	@Test
-//	void appelApiGetListeUtilisateur_obtientCode200() throws Exception {
-//
-//		mvc.perform(get("/liste-utilisateur")).andExpect(status().isOk());
-//
-//	}
-//
-//	@Test
-//	void appelApiGetListeUtilisateur_contientJSON() throws Exception {
-//
-//		mvc.perform(get("/liste-utilisateur").contentType(MediaType.APPLICATION_JSON));
-//
-//	}
-//
-//	@Test
-//	void appelApiGetListeUtilisateur_neContientPasMotDePasse() throws Exception {
-//
-//		//est ce que le premier utilisateur possède une propriété "id"
-//		mvc.perform(get("/liste-utilisateur"))
-//				.andExpect(jsonPath("$[0].id").exists());
-//
-//		//est ce que le premier utilisateur ne possède pas une propriété "password"
-//		mvc.perform(get("/liste-utilisateur"))
-//				.andExpect(jsonPath("$[0].password").doesNotExist());
-//
-//	}
+	@Test
+	void creationArticle_nomNonNull() {
+
+		Article article = new Article();
+		article.setNom("Sofyanne");
+		assertNotNull(article.getNom());
+
+	}
+
+	@Test
+	void appelApiGetListeUtilisateur_obtientCode200() throws Exception {
+
+		mvc.perform(get("/liste-employe")).andExpect(status().isOk());
+
+	}
+
+	@Test
+	void appelApiGetListeUtilisateur_contientJSON() throws Exception {
+
+		mvc.perform(get("/liste-employe").contentType(MediaType.APPLICATION_JSON));
+
+	}
+
 
 }
