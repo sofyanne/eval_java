@@ -27,21 +27,18 @@ public class CommandeController {
     }
 
     @GetMapping("/liste-commande")
-    @JsonView(AffichageCommande.class)
+    @JsonView({AffichageCommande.class})
     public List<Commande> commandes() {
         List<Commande> listeCommandes = this.commandeDao.findAll();
+        System.out.println(listeCommandes);
         return listeCommandes;
     }
 
     @PostMapping("/article")
     @JsonView(AffichageCommande.class)
-    public String ajouterArticle() {
-        Article nouvelArticle = new Article();
-        nouvelArticle.setNom("Jean");
-        nouvelArticle.setPrix(1);
-
-        articleDao.save(nouvelArticle);
-
+    public String ajouterArticle(@RequestBody Article article) {
+        articleDao.save(article);
+        System.out.println(article);
         return "OK";
     }
 

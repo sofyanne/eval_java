@@ -2,14 +2,8 @@ package edu.mns.dfs.controller;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
-import edu.mns.dfs.dao.AdministrateurDao;
 import edu.mns.dfs.dao.EmployeDao;
-import edu.mns.dfs.model.Administrateur;
 import edu.mns.dfs.model.Employe;
-import edu.mns.dfs.model.Profession;
-import edu.mns.dfs.model.Utilisateur;
-import edu.mns.dfs.view.AffichageAdministrateur;
-import edu.mns.dfs.view.AffichageEmploye;
 
 import edu.mns.dfs.view.AffichageUtilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +18,22 @@ import java.util.List;
 @CrossOrigin
 public class EmployeController {
     EmployeDao employeDao;
-    AdministrateurDao administrateurDao;
 
     @Autowired
-    public EmployeController(EmployeDao employeDao, AdministrateurDao administrateurDao) {
+    public EmployeController(EmployeDao employeDao) {
 
         this.employeDao = employeDao;
-        this.administrateurDao = administrateurDao;
     }
 
     @GetMapping("/employe/{id}")
-    @JsonView(AffichageEmploye.class)
+    @JsonView(AffichageUtilisateur.class)
     public Employe employe(@PathVariable int id) {
 
         return employeDao.findById(id).orElse(null);
     }
 
     @GetMapping("/liste-employe")
-    @JsonView(AffichageEmploye.class)
+    @JsonView(AffichageUtilisateur.class)
     public List<Employe> listeEmploye() {
 
 
@@ -51,11 +43,10 @@ public class EmployeController {
     }
 
     @GetMapping("/compte-administrateur")
-    @JsonView(AffichageAdministrateur.class)
+    @JsonView({AffichageUtilisateur.class})
     public Integer compteAdministrateur() {
 
-        List<Administrateur> listeUtilisateur = this.administrateurDao.findAll();
-
+        List<Employe> listeUtilisateur = this.employeDao.findAdministrateur();
         return listeUtilisateur.size();
     }
 }

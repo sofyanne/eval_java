@@ -2,6 +2,7 @@ package edu.mns.dfs.model;
 
 
 import com.fasterxml.jackson.annotation.JsonView;
+import edu.mns.dfs.view.AffichageCommande;
 import edu.mns.dfs.view.AffichageLigneCommande;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,17 @@ public class LigneCommande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(AffichageLigneCommande.class)
+    @JsonView(AffichageCommande.class)
     private Integer Id;
+
+    @JsonView(AffichageCommande.class)
+    private Integer quantite;
+
+
+    @ManyToOne
+    private Commande commande;
+
+    @ManyToOne
+    @JsonView(AffichageCommande.class)
+    private Article article;
 }

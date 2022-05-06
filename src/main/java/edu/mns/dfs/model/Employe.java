@@ -9,15 +9,17 @@ import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class Employe {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView({AffichageUtilisateur.class, AffichageEmploye.class})
-    private Integer id;
+public class Employe extends Utilisateur{
+
     private boolean administrateur;
+
+    @OneToMany(mappedBy = "gestionnaire")
+    @JsonView(AffichageUtilisateur.class)
+    private List<Article> listeArticleAgerer;
 }

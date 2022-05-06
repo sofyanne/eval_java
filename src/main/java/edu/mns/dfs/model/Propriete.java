@@ -16,8 +16,11 @@ import javax.persistence.*;
 public class Propriete {
 
 
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(AffichagePropriete.class)
     private Integer Id;
+
+    @JsonView(AffichagePropriete.class)
+    private String nom;
 }

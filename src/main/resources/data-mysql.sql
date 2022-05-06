@@ -1,9 +1,19 @@
-INSERT INTO profession (nom) VALUES ("developpeur"),("comptable"),("pdg");
+INSERT INTO moyen_paiement (nom) VALUES ("CB"),("Paypal");
+INSERT INTO propriete (nom) VALUES ("Largeur"),("Hauteur"),("Poid");
 
-INSERT INTO utilisateur (login,password,profession_id)
-VALUES ("franck","root",3),("admin","root",1), ("user2","root",1), ("user3","root",1), ("user4","root",1), ("user5","root",1), ("user6","root",1), ("user7","root",1), ("user8","root",1), ("user9","root",1), ("user10","root",1), ("user11","root",1), ("user12","root",1), ("user13","root",1), ("user14","root",1), ("user15","root",1);
+INSERT INTO utilisateur (login,password)
+VALUES ("cocolastico","5318008"),("kevinlehacker","azerty"),("admin","root"),("employe 1","qwerty");
 
-INSERT INTO competence (nom) VALUES ("JAVA"),("PHP"),("Excel");
+INSERT INTO employe (id,administrateur)
+VALUES (3,1),(4,0);
 
-INSERT INTO competence_utilisateur (utilisateur_id, competence_id) VALUES (1,1),(1,2),(2,1),(2,3);
+INSERT INTO article (nom, prix, gestionnaire_id)
+VALUES ("GRÖNLID",19.0, 3),("HEMNES",34.0, 4),("EKTORP",32.0, 3),("LINANÄS",49.0, 4);
 
+INSERT INTO caracteristique (article_id, propriete_id, valeur) VALUES (1,1,200),(1,2,300),(2,1,50);
+
+INSERT INTO commande (date_paiement, client_id)
+VALUES ("2022-01-02",3);
+
+INSERT INTO ligne_commande (commande_id,article_id, quantite)
+VALUES (1,1,5),(1,2,3);
