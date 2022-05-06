@@ -29,82 +29,21 @@ public class UtilisateurController {
         this.administrateurDao = administrateurDao;
     }
 
-    @GetMapping("/ajout-admin")
-    public String ajoutAdmin() {
 
-        Administrateur nouvelAdmin = new Administrateur();
-        nouvelAdmin.setLogin("Jean");
-        nouvelAdmin.setPassword("root");
-        nouvelAdmin.setDateContrat(new Date());
+    @GetMapping("/compte-utilisateur")
+    public Integer compteUtilisateur() {
 
-        administrateurDao.save(nouvelAdmin);
-
-        return "OK";
+        List<Utilisateur> listeUtilisateur =  this.utilisateurDao.findAll();
+        return listeUtilisateur.size();
     }
 
-    @GetMapping("/utilisateur/{id}")
-    @JsonView(AffichageUtilisateur.class)
-    public Utilisateur utilisateur(@PathVariable int id) {
-
-        return utilisateurDao.findById(id).orElse(null);
-    }
-
-    @GetMapping("/10-premier-utilisateur")
-    @JsonView(AffichageUtilisateur.class)
-    public List<Utilisateur> liste10PremierUtilisateur(){
-        return utilisateurDao.trouve10premierUtilisateur();
-    }
-
-    @GetMapping("/n-premier-utilisateur/{nombreUtilisateur}")
-    @JsonView(AffichageUtilisateur.class)
-    public List<Utilisateur> listeNPremierUtilisateur(@PathVariable int nombreUtilisateur){
-        return utilisateurDao.trouveNpremierUtilisateur(nombreUtilisateur);
-    }
-
-
-    @GetMapping("/utilisateur-by-login/{login}")
-    @JsonView(AffichageUtilisateur.class)
-    public Utilisateur utilisateur(@PathVariable String login) {
-
-        return utilisateurDao.findByLogin(login).orElse(null);
-    }
-
-    @GetMapping("/liste-utilisateur")
-    @JsonView(AffichageUtilisateur.class)
-    public List<Utilisateur> utilisateurs() {
-
-        System.out.println(utilisateurDao.maxIdUtilisateur());
-
-        List<Utilisateur> listeUtilisateur = this.utilisateurDao.findAll();
-
-        return listeUtilisateur;
-    }
-
-    @GetMapping("/somme-par-profession")
-    public List<Object> sommeParProfession() {
-
-        return this.utilisateurDao.sommeParProfession();
-    }
-
-    @PostMapping("/utilisateur")
-    public String ajoutUtilisateur(@RequestBody Utilisateur utilisateur) {
-
-        Competence developpeur = new Competence();
-        developpeur.setId(1);
-
-        utilisateur.getListeCompetence().add(developpeur);
-
-        utilisateurDao.save(utilisateur);
-
-        return "OK";
-    }
 
     @DeleteMapping("/utilisateur/{id}")
     public String supprimeUtilisateur(@PathVariable int id) {
 
         utilisateurDao.deleteById(id);
 
-        return "OK";
+        return "Utilisateur supprimé !";
     }
 
 }
